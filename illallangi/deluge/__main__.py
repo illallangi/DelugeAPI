@@ -133,8 +133,10 @@ def restore_trackers(host_filter, torrent_filter):
           type=STRING,
           default='')
 @option('--orpheus-api-key',
+        envvar='ORP_API_KEY',
         type=STRING)
 @option('--redacted-api-key',
+        envvar='RED_API_KEY',
         type=STRING)
 def rename_files(host_filter, torrent_filter, orpheus_api_key, redacted_api_key):
     hosts = DELUGE_API()
