@@ -93,7 +93,7 @@ def get_hosts(host_filter, torrent_filter):
                 echo(style(f'{filter}, ', fg=filter.fg), nl=False)
             else:
                 echo(style(f'{filter}, '), nl=False)
-        echo(f']')
+        echo(']')
 
 
 @cli.command(name='restore-trackers')
