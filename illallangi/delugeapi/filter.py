@@ -8,11 +8,23 @@ class Filter(object):
         return f'{self.__class__}({self.key}: {self.value})'
 
     def __str__(self):
-        return f'{self.key}: {self.value}'
+        return f'{self.key}: {self.value:3}'
 
     @property
-    def iserror(self):
-        return self.key == 'Error'
+    def fg(self):
+        if self.key == 'Seeding':
+            return 'green'
+        if self.key == 'Downloading':
+            return 'yellow'
+        if self.key == 'Queued':
+            return 'cyan'
+        if self.key == 'Checking':
+            return 'blue'
+        if self.key == 'Paused':
+            return 'red'
+        if self.key == 'Error':
+            return 'red'
+        return None
 
     @property
     def key(self):
