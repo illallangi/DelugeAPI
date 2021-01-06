@@ -6,6 +6,7 @@ from beets.util import asciify_path, sanitize_path
 
 from click import Choice as CHOICE, FLOAT, STRING, argument, confirm, echo, group, option, style
 
+from illallangi.btnapi import API as BTN_API
 from illallangi.delugeapi import API as DELUGE_API
 from illallangi.orpheusapi import API as ORP_API
 from illallangi.redactedapi import API as RED_API
@@ -132,15 +133,25 @@ def restore_trackers(host_filter, torrent_filter):
 @argument('torrent-filter',
           type=STRING,
           default='')
+@option('--btn-api-key',
+        envvar='BTN_API_KEY',
+        type=STRING)
 @option('--orpheus-api-key',
         envvar='ORP_API_KEY',
         type=STRING)
 @option('--redacted-api-key',
         envvar='RED_API_KEY',
         type=STRING)
-def rename_files(host_filter, torrent_filter, orpheus_api_key, redacted_api_key):
+def rename_files(host_filter, torrent_filter, btn_api_key, orpheus_api_key, redacted_api_key):
     hosts = DELUGE_API()
     apis = []
+
+    if (btn_api_key):
+        logger.trace('Testing BTN API configuration')
+        btn_api = BTN_API(btn_api_key)
+        btn_index = btn_api.get_index()
+        logger.success(f'Connected to BTN as {btn_index.username}')
+        apis.append(btn_api)
 
     if (orpheus_api_key):
         logger.trace('Testing Orpheus API configuration')

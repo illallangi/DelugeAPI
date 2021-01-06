@@ -31,8 +31,9 @@ setuptools.setup(
         'unidecode',
         'yarl',
         'deluge-client==1.3.0',
-        'illallangi.torrentapi @ git+https://github.com/illallangi/TorrentAPI@master',
+        'illallangi.btnapi @ git+https://github.com/illallangi/BTNAPI@master',
         'illallangi.orpheusapi @ git+https://github.com/illallangi/OrpheusAPI@master',
         'illallangi.redactedapi @ git+https://github.com/illallangi/RedactedAPI@master',
+        'illallangi.torrentapi @ git+https://github.com/illallangi/TorrentAPI@master',
     ]
 )
