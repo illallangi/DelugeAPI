@@ -82,21 +82,17 @@ def get_hosts(host_filter, torrent_filter):
         echo(f'  {host}:', nl=False)
         echo(f' [{len(host.state_tree)} state filter(s):', nl=False)
         for filter in host.state_tree:
-            if filter.value == 0:
-                continue
-            if filter.iserror:
-                echo(style(f'{filter},', fg='red'), nl=False)
+            if filter.value > 0 and filter.fg:
+                echo(style(f'{filter}, ', fg=filter.fg), nl=False)
             else:
-                echo(style(f'{filter},'), nl=False)
+                echo(style(f'{filter}, '), nl=False)
         echo(f'],[{len(host.tracker_tree)} tracker filter(s):', nl=False)
         for filter in host.tracker_tree:
-            if filter.value == 0:
-                continue
-            if filter.iserror:
-                echo(style(f'{filter},', fg='red'), nl=False)
+            if filter.value > 0 and filter.fg:
+                echo(style(f'{filter}, ', fg=filter.fg), nl=False)
             else:
-                echo(style(f'{filter},'), nl=False)
-        echo()
+                echo(style(f'{filter}, '), nl=False)
+        echo(f']')
 
 
 @cli.command(name='restore-trackers')
